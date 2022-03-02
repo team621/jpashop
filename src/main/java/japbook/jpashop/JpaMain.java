@@ -1,6 +1,7 @@
 package japbook.jpashop;
 
 import japbook.jpashop.domain.Order;
+import japbook.jpashop.domain.OrderItem;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -21,7 +22,8 @@ public class JpaMain {
         tx.begin();
 
         try{
-            Order order = em.find(Order.class, 1L);
+            Order order = new Order();
+            order.addOrderItem(new OrderItem());
 
             //트랜잭션 커밋
             tx.commit();
