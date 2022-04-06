@@ -14,7 +14,7 @@ public class Order  extends BaseEntity{
     @Column(name="ORDER_ID")
     private Long id;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "MEMBER_ID")
     private Member member;
 
@@ -24,10 +24,10 @@ public class Order  extends BaseEntity{
     private OrderStatus status;
 
     //단방향으로 설계하는 것을 추천, 아래 코드(양방향)는 되도록 안쓰는게 유리
-    @OneToMany(mappedBy = "order")
+    @OneToMany(mappedBy = "order", cascade = CascadeType.ALL)
     private List<OrderItem> orderItems = new ArrayList<>();
 
-    @OneToOne
+    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "DELIVERY_ID")
     private Delivery delivery;
 
